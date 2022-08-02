@@ -1,4 +1,4 @@
-package com.example.ui.home
+package com.example.appproject.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.appproject.R
-import com.example.appproject.ui.home.ViewModel
-import org.w3c.dom.Text
 
 class ContentFragment : Fragment() {
 
