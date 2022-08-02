@@ -1,26 +1,48 @@
 package com.example.appproject.ui.home
-
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.appproject.R
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson as Gson
 
-class HomeFragment : Fragment() {
+class Home : Fragment() {
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        createRecyclerView(view)
+        return view
     }
+    lateinit var viewModel: ViewModel
+    private val adapter = Adapter()
+    private fun createRecyclerView(view: View):View {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+        viewModel = ViewModelProvider(requireActivity()).get(ViewModel::class.java)
+        adapter.data.addAll(viewModel.getDatas())
+        adapter.notifyDataSetChanged()
 
-    override fun onDestroy() {
-        super.onDestroy()
+        val rv = view.findViewById<RecyclerView>(R.id.rv)
+        rv.layoutManager = LinearLayoutManager(context)
+        rv.adapter = adapter
+
+        
+        adapter.setOnItemClickListener {
+            Toast.makeText(activity,"Check the detail",Toast.LENGTH_LONG).show()
+            viewModel.news.value = it
+            val fragmentManager:FragmentManager = parentFragmentManager
+            val transition: FragmentTransaction =fragmentManager.beginTransaction()
+            transition.replace(R.id.frag,ContentFragment()).addToBackStack(null)
+            transition.commit()
+        }
+        return view
     }
 }

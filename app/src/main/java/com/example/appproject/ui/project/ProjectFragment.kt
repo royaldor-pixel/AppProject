@@ -2,25 +2,20 @@ package com.example.appproject.ui.project
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.appproject.R
-import com.google.android.material.tabs.TabLayout
 
 @SuppressLint("NotifyDataSetChanged")
 
 class ProjectFragment : Fragment() {
     private val projectViewModel = ProjectViewModel()
-    lateinit var adapter: ProjectAdapter
+    private lateinit var projectAdapter: ProjectAdapter
     private lateinit var progressbar: View
 
     override fun onCreateView(
@@ -28,7 +23,7 @@ class ProjectFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adapter = ProjectAdapter(requireActivity()) {
+        projectAdapter = ProjectAdapter(requireActivity()) {
             onReplaceFragment(it)
         }
         return inflater.inflate(R.layout.fragment_project, container, false)
@@ -46,11 +41,14 @@ class ProjectFragment : Fragment() {
         //添加观察者
         projectViewModel.shareProjectData.observe(requireActivity()) {
             progressbar.visibility = View.GONE
-            adapter.addData(it.datas)
+            projectAdapter.addData(it.datas)
             projectRecyclerView.adapter?.notifyDataSetChanged()
         }
+        projectViewModel.shareProjectCategory.observe(requireActivity()) {
 
-        projectRecyclerView.adapter = adapter
+        }
+
+        projectRecyclerView.adapter = projectAdapter
 
 
         //下拉刷新
@@ -75,7 +73,7 @@ class ProjectFragment : Fragment() {
 
 
     private fun initData() {
-        if (adapter.isEmpty()) {
+        if (projectAdapter.isEmpty()) {
             progressbar.visibility = View.VISIBLE
         }
         projectViewModel.onRefresh()
