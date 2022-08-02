@@ -12,7 +12,6 @@ import com.example.appproject.R
 
 class ContentFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,5 +31,11 @@ class ContentFragment : Fragment() {
             title.text = it.title
             content.loadUrl(it.link)
         }
+    }
+
+    fun function1(step2: () -> Unit) {
+        // step1 ..
+        step2()
+        // step3 ..
     }
 }

@@ -5,7 +5,13 @@ import android.content.Context
 import java.lang.Math.random
 
 class MainApplication:Application() {
-    companion object{
+
+    fun ss() {
 
     }
+
+    companion object {
+        var str = ""
+    }
+
 }

@@ -10,13 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.appproject.R
+import com.example.appproject.ui.BaseFragment
+import com.example.appproject.ui.User
 
 @SuppressLint("NotifyDataSetChanged")
 
-class ProjectFragment : Fragment() {
+class ProjectFragment : BaseFragment() {
     private val projectViewModel = ProjectViewModel()
     private lateinit var projectAdapter: ProjectAdapter
     private lateinit var progressbar: View
+    override fun onLogin(user: User) {
+    }
+
+    override fun onLogout() {
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
