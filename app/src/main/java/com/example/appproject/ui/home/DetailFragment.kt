@@ -9,6 +9,8 @@ import android.webkit.WebView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.appproject.R
+import com.example.appproject.ui.home.ViewModel
 import org.w3c.dom.Text
 
 class ContentFragment : Fragment() {
@@ -18,20 +20,20 @@ class ContentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
-        val view:View = inflater.inflate((R.layout.fragment_blank),container,false)
+        val view:View = inflater.inflate((R.layout.fragment_detail_home),container,false)
         displayContent(view)
         return view
     }
-    private lateinit var viewModel:ViewModel
+    private lateinit var viewModel: ViewModel
     private fun displayContent(view:View) {
         val content:WebView = view.findViewById(R.id.webview)
         val time:TextView = view.findViewById(R.id.content_time)
         val title:TextView = view.findViewById(R.id.content_title)
         viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
-        viewModel.news.observe(viewLifecycleOwner,Observer{
-            time.text = it.niceDate.toString()
-            title.text = it.title.toString()
-            content.loadUrl(it.link.toString())
-        })
+        viewModel.news.observe(viewLifecycleOwner) {
+            time.text = it.niceDate
+            title.text = it.title
+            content.loadUrl(it.link)
+        }
     }
 }

@@ -6,6 +6,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appproject.R
+import com.example.appproject.ui.home.ArticleItem
 
 class Adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -14,7 +16,7 @@ class Adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var onItemClick: ((ArticleItem)->Unit)?=null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-       val view = LayoutInflater.from(parent.context).inflate(R.layout.item,parent ,false)
+       val view = LayoutInflater.from(parent.context).inflate(R.layout.home_item,parent ,false)
         return  object :RecyclerView.ViewHolder(view){}
     }
 

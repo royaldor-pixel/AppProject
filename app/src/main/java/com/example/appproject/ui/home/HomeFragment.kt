@@ -1,4 +1,5 @@
 package com.example.appproject.ui.home
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +11,12 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appproject.R
+import com.example.ui.home.Adapter
+import com.example.ui.home.ContentFragment
 import com.google.gson.Gson as Gson
-
-class Home : Fragment() {
+@SuppressLint("NotifyDataSetChanged")
+class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +28,7 @@ class Home : Fragment() {
     }
     lateinit var viewModel: ViewModel
     private val adapter = Adapter()
+
     private fun createRecyclerView(view: View):View {
 
         viewModel = ViewModelProvider(requireActivity()).get(ViewModel::class.java)
@@ -36,12 +41,13 @@ class Home : Fragment() {
 
         
         adapter.setOnItemClickListener {
-            Toast.makeText(activity,"Check the detail",Toast.LENGTH_LONG).show()
+//            Toast.makeText(activity,"Check the detail",Toast.LENGTH_LONG).show()
             viewModel.news.value = it
             val fragmentManager:FragmentManager = parentFragmentManager
             val transition: FragmentTransaction =fragmentManager.beginTransaction()
-            transition.replace(R.id.frag,ContentFragment()).addToBackStack(null)
-            transition.commit()
+            transition.replace(R.id.main_activity_fragment_container, ContentFragment())
+                .addToBackStack(null).commit()
+//            transition.commit()
         }
         return view
     }
