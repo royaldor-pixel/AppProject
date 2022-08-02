@@ -7,44 +7,51 @@ import androidx.lifecycle.ViewModel
 import com.example.wanandroidapi.NetData
 import com.example.wanandroidapi.NetResult
 import com.example.wanandroidapi.repository.ProjectRepository
-import com.google.gson.Gson
 
 
 class ProjectViewModel : ViewModel() {
-    private val projectResponse = MutableLiveData<Data>()
-    private val projectCategory = MutableLiveData<List<String>>()
-    var shareProjectData: LiveData<Data> = projectResponse
-    var shareProjectCategory: LiveData<List<String>> = projectCategory
-
+    private val projectResponse = MutableLiveData<ProjectData>()
+    private val projectCategory = MutableLiveData<ProjectCategoryData>()
+    var shareProjectData: LiveData<ProjectData> = projectResponse
+    var shareProjectCategory: LiveData<ProjectCategoryData> = projectCategory
 
 
     private fun getProjectCategory() {
-        ProjectRepository.getProjectsCategory(object : NetResult<Any> {
-            override fun onResult(netData: NetData<Any>) {
+        ProjectRepository.getProjectsCategory(object : NetResult<ProjectCategoryData> {
+            override fun onResult(netData: NetData<ProjectCategoryData>) {
                 if (netData.errorCode == 0) {
-                    Log.d("category", netData.json)
+                    Log.d("category", netData.data.toString())
+                    netData.data?.let {
+                        projectCategory.postValue(it)
+                    }
                 }
             }
-
         })
     }
 
     private fun getProjectResponse() {
-        ProjectRepository.getProjectList(1, 294, object : NetResult<Data> {
-            override fun onResult(netData: NetData<Data>) {
+        ProjectRepository.getProjectList(1, 294, object : NetResult<ProjectData> {
+            override fun onResult(netData: NetData<ProjectData>) {
                 if (netData.errorCode == 0) {
-                    Log.d("spencer", netData.json)
                     netData.data?.let {
                         projectResponse.postValue(it)
                     }
 
                 }
             }
-
         })
     }
 
-    data class Data(
+    data class ProjectCategoryData(
+        val data: List<ProjectCategory>
+    )
+
+    data class ProjectCategory(
+        val name: String,
+        val id: Int,
+    )
+
+    data class ProjectData(
         val curPage: Int,
         val datas: MutableList<Project>,
         val pageCount: Int,
@@ -63,6 +70,5 @@ class ProjectViewModel : ViewModel() {
 
     fun onRefresh() {
         getProjectResponse()
-        getProjectCategory()
     }
 }
