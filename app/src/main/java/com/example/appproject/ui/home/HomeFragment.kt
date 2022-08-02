@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson as Gson
 
-class HomeFragment : Fragment() {
+class Home : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
     private val adapter = Adapter()
     private fun createRecyclerView(view: View):View {
 
-
+        viewModel = ViewModelProvider(requireActivity()).get(ViewModel::class.java)
         adapter.data.addAll(viewModel.getDatas())
         adapter.notifyDataSetChanged()
 
@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = adapter
 
-        viewModel = ViewModelProvider(requireActivity()).get(ViewModel::class.java)
+        
         adapter.setOnItemClickListener {
             Toast.makeText(activity,"Check the detail",Toast.LENGTH_LONG).show()
             viewModel.news.value = it
