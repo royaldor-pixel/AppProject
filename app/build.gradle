@@ -50,6 +50,10 @@ dependencies {
     testImplementation "io.mockk:mockk-agent-jvm:1.12.5"
     androidTestImplementation "io.mockk:mockk-android:1.12.5"
     androidTestImplementation "io.mockk:mockk-agent-jvm:1.12.5"
+    testImplementation "io.mockk:mockk:1.12.5"
+    testImplementation "io.mockk:mockk-agent-jvm:1.12.5"
+    androidTestImplementation "io.mockk:mockk-android:1.12.5"
+    androidTestImplementation "io.mockk:mockk-agent-jvm:1.12.5"
 
 
 
