@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.appproject.R
-import com.example.appproject.ui.BaseFragment
-import com.example.appproject.ui.User
 
 @SuppressLint("NotifyDataSetChanged")
 
@@ -41,12 +39,12 @@ class ProjectFragment : Fragment() {
         progressbar = view.findViewById(R.id.progress)
 
         //添加观察者
-        projectViewModel.shareProjectData.observe(requireActivity()) {
+        projectViewModel.projectData.observe(requireActivity()) {
             progressbar.visibility = View.GONE
             projectAdapter.addData(it.datas)
             projectRecyclerView.adapter?.notifyDataSetChanged()
         }
-        projectViewModel.shareProjectCategory.observe(requireActivity()) {
+        projectViewModel.projectCategory.observe(requireActivity()) {
 
         }
 

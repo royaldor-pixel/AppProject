@@ -5,15 +5,13 @@ import com.example.wanandroidapi.NetResult
 import com.example.wanandroidapi.repository.ProjectRepository
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.impl.stub.StubRepository
-import kotlinx.coroutines.runBlocking
-import net.bytebuddy.matcher.ElementMatchers.any
+import junit.framework.TestCase
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class ProjectViewModelTest {
+class ProjectViewModelTest :TestCase() {
     @MockK
     lateinit var projectViewModel: ProjectViewModel
     lateinit var projectRepository: ProjectRepository
@@ -28,7 +26,7 @@ class ProjectViewModelTest {
 
     @Test
     fun `What if the data is null`() {
-        projectRepository.getProjectList(0,0, object : NetResult<ProjectViewModel.ProjectData> {
+        val result = projectRepository.getProjectList(0,0, object : NetResult<ProjectViewModel.ProjectData> {
             override fun onResult(netData: NetData<ProjectViewModel.ProjectData>) {
                 if (netData.errorCode == 0) {
                     netData.data?.let {
@@ -36,6 +34,7 @@ class ProjectViewModelTest {
                 }
             }
         })
+
 
     }
 

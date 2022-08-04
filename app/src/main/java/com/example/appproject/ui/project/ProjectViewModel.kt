@@ -1,6 +1,5 @@
 package com.example.appproject.ui.project
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,10 +9,10 @@ import com.example.wanandroidapi.repository.ProjectRepository
 
 
 class ProjectViewModel : ViewModel() {
-    private val projectResponse = MutableLiveData<ProjectData>()
-    private val projectCategory = MutableLiveData<ProjectCategoryData>()
-    var shareProjectData: LiveData<ProjectData> = projectResponse
-    var shareProjectCategory: LiveData<ProjectCategoryData> = projectCategory
+    private val _projectData = MutableLiveData<ProjectData>()
+    private val _projectCategory = MutableLiveData<ProjectCategoryData>()
+    val projectData: LiveData<ProjectData> = _projectData
+    val projectCategory: LiveData<ProjectCategoryData> = _projectCategory
 
 
 //    private fun getProjectCategory() {
@@ -34,7 +33,7 @@ class ProjectViewModel : ViewModel() {
             override fun onResult(netData: NetData<ProjectData>) {
                 if (netData.errorCode == 0) {
                     netData.data?.let {
-                        projectResponse.postValue(it)
+                        _projectData.postValue(it)
                     }
                 }
             }

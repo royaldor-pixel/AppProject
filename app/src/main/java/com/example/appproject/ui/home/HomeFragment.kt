@@ -11,11 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appproject.R
-import com.example.appproject.ui.BaseFragment
 import com.example.appproject.ui.User
 
 @SuppressLint("NotifyDataSetChanged")
-class HomeFragment : BaseFragment() {
+class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,16 +49,5 @@ class HomeFragment : BaseFragment() {
         }
         return view
     }
-
-    override fun onLogin(user: User) {
-//        val singleton = Singleton()
-//        val s2 = Singleton.getInstance()
-
-    }
-
-    override fun onLogout() {
-
-    }
-
 
 }
