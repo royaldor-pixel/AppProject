@@ -8,21 +8,22 @@ import com.example.appproject.ShareViewModel
 
 abstract class BaseFragment : Fragment() {
 
-    lateinit var state: ShareViewModel
+    private lateinit var state: ShareViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        state = ViewModelProvider(requireActivity()).get(ShareViewModel::class.java)
+        state = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
 
-        state.loginState.observe(viewLifecycleOwner, object : Observer<User?> {
-            override fun onChanged(t: User?) {
-                if (t == null) {
-                    onLogout()
-                } else {
-                    onLogin(t)
-                }
+        state.loginState.observe(
+            viewLifecycleOwner
+        ) { t ->
+            if (t == null) {
+                onLogout()
             }
-        })
+            else {
+                onLogin(t)
+            }
+        }
     }
 
     abstract fun onLogin(user: User)

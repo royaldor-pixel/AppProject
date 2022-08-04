@@ -41,6 +41,7 @@ class ProjectAdapter(
         holder.projectDate.text = project.niceDate
         holder.projectAuthor.text = project.author
         Glide.with(activity).load(project.envelopePic).into(holder.projectPic)
+
         holder.projectItem.setOnClickListener {
             projectLinkCallback(projectLink)
         }

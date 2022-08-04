@@ -15,15 +15,10 @@ import com.example.appproject.ui.User
 
 @SuppressLint("NotifyDataSetChanged")
 
-class ProjectFragment : BaseFragment() {
+class ProjectFragment : Fragment() {
     private val projectViewModel = ProjectViewModel()
     private lateinit var projectAdapter: ProjectAdapter
     private lateinit var progressbar: View
-    override fun onLogin(user: User) {
-    }
-
-    override fun onLogout() {
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,7 +57,7 @@ class ProjectFragment : BaseFragment() {
         projectSwipeRefreshLayout.setOnRefreshListener {
             projectViewModel.onRefresh()
             projectSwipeRefreshLayout.isRefreshing = false
-            projectRecyclerView.adapter?.notifyDataSetChanged()
+//            projectRecyclerView.adapter?.notifyDataSetChanged()
         }
 
         initData()

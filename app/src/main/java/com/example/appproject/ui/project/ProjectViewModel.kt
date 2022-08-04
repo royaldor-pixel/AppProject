@@ -16,18 +16,18 @@ class ProjectViewModel : ViewModel() {
     var shareProjectCategory: LiveData<ProjectCategoryData> = projectCategory
 
 
-    private fun getProjectCategory() {
-        ProjectRepository.getProjectsCategory(object : NetResult<ProjectCategoryData> {
-            override fun onResult(netData: NetData<ProjectCategoryData>) {
-                if (netData.errorCode == 0) {
-                    Log.d("category", netData.data.toString())
-                    netData.data?.let {
-                        projectCategory.postValue(it)
-                    }
-                }
-            }
-        })
-    }
+//    private fun getProjectCategory() {
+//        ProjectRepository.getProjectsCategory(object : NetResult<ProjectCategoryData> {
+//            override fun onResult(netData: NetData<ProjectCategoryData>) {
+//                if (netData.errorCode == 0) {
+//                    Log.d("category", netData.data.toString())
+//                    netData.data?.let {
+//                        projectCategory.postValue(it)
+//                    }
+//                }
+//            }
+//        })
+//    }
 
     private fun getProjectResponse() {
         ProjectRepository.getProjectList(1, 294, object : NetResult<ProjectData> {
@@ -36,7 +36,6 @@ class ProjectViewModel : ViewModel() {
                     netData.data?.let {
                         projectResponse.postValue(it)
                     }
-
                 }
             }
         })
