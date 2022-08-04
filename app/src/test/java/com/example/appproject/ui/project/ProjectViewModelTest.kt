@@ -4,6 +4,7 @@ import com.example.wanandroidapi.NetData
 import com.example.wanandroidapi.NetResult
 import com.example.wanandroidapi.repository.ProjectRepository
 import io.mockk.*
+import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.impl.stub.StubRepository
 import kotlinx.coroutines.runBlocking
@@ -13,7 +14,7 @@ import org.junit.Before
 import org.junit.Test
 
 class ProjectViewModelTest {
-    @RelaxedMockK
+    @MockK
     lateinit var projectViewModel: ProjectViewModel
     lateinit var projectRepository: ProjectRepository
 
@@ -31,7 +32,6 @@ class ProjectViewModelTest {
             override fun onResult(netData: NetData<ProjectViewModel.ProjectData>) {
                 if (netData.errorCode == 0) {
                     netData.data?.let {
-
                     }
                 }
             }
