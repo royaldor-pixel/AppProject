@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appproject.R
-import com.example.appproject.ui.User
 
 @SuppressLint("NotifyDataSetChanged")
 class HomeFragment : Fragment() {
@@ -49,5 +48,7 @@ class HomeFragment : Fragment() {
         }
         return view
     }
+
+
 
 }

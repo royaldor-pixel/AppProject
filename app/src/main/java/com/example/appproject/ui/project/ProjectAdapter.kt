@@ -1,6 +1,7 @@
 package com.example.appproject.ui.project
 
 import android.app.Activity
+import android.content.Context
 import android.os.IInterface
 import android.view.LayoutInflater
 import android.view.View
@@ -11,20 +12,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appproject.R
+import com.example.appproject.data.db.entities.ProjectItem
 
 class ProjectAdapter(
-    private val activity: Activity,
-    private val projectList: MutableList<ProjectViewModel.Project> = mutableListOf(),
-    private val projectLinkCallback : (String) -> Unit
 ) : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>() {
-
-
-    fun addData(list : MutableList<ProjectViewModel.Project>) {
-        projectList.addAll(list)
-    }
-
-
-    fun isEmpty() : Boolean = projectList.isEmpty()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
@@ -35,8 +26,7 @@ class ProjectAdapter(
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
         val project = projectList[position]
-        val projectLink = project.link
-        holder.projectTitle.text = project.title
+        val projectLink = holder.projectTitle.text = project.title
         holder.projectDescribe.text = project.desc
         holder.projectDate.text = project.niceDate
         holder.projectAuthor.text = project.author
@@ -50,6 +40,14 @@ class ProjectAdapter(
 
     override fun getItemCount(): Int {
         return projectList.size
+    }
+
+    fun getActivity(activity: Activity): Context {
+        return activity
+    }
+
+    fun getProjectList(projectList: List<ProjectItem>):List<ProjectItem>{
+        return projectList
     }
 
 

@@ -13,7 +13,7 @@ import com.example.appproject.ui.project.ProjectFragment
 import com.example.appproject.ui.square.SquareFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class AppActivity : AppCompatActivity() {
 
     private val squareFragment = SquareFragment()
     private val homeFragment = HomeFragment()
